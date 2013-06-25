@@ -1,0 +1,6 @@
+[submodule "rlutil"]
+	path = rlutil
+	url = git@github.com:tapio/rlutil.git
+[submodule "LuaBridge"]
+	path = LuaBridge
+	url = git@github.com:vinniefalco/LuaBridge.git
