@@ -76,3 +76,9 @@ local lib=project "lurlutil"
 		path.join(basedir,"**.h")
 	}
 	FixLibNameTmp()
+
+	newaction {
+		trigger     = "test",
+		description = "Start the test script",
+		--execute     = os.execute [[ src/test.lua ]]
+	}
