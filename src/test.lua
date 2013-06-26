@@ -84,6 +84,7 @@ while true do
 		end
 		lurlutil.locate(x,y) io.write "@" -- Output player
 		cnt=cnt+1
+		lurlutil.flush()
 	end
 	lurlutil.showcursor()
 end
@@ -96,39 +97,39 @@ lurlutil.hidecursor()
 print "Test 8: Arrow keys"
 print "You should be able to move the '@' character with arrow keys."
 print "Hit Escape to continue to the next test."
-	lurlutil.gotoxy(x,y) io.write "@" -- Output player
-	while true do
+lurlutil.gotoxy(x,y) io.write "@" -- Output player
+while true do
 	if lurlutil.kbhit() then
-	local k = lurlutil.getkey() -- Get character
-	lurlutil.gotoxy(x,y) io.write " " -- Erase player
---------if (k == lurlutil.KEY_LEFT) --x
---------elseif (k == lurlutil.KEY_RIGHT) ++x
---------elseif (k == lurlutil.KEY_UP) --y
---------elseif (k == lurlutil.KEY_DOWN) ++y
---------elseif (k == lurlutil.KEY_ESCAPE) break
---------gotoxy(x,y) print "@" // Output player
---------fflush(stdout)
-------}
-----}
---}
+		local k = lurlutil.getkey() -- Get character
+		lurlutil.gotoxy(x,y) io.write " " -- Erase player
+		if k == lurlutil.KEY_LEFT then x=x-1 io.write('left')
+		elseif k == lurlutil.KEY_RIGHT then x=x+1
+		elseif k == lurlutil.KEY_UP then y=y-1
+		elseif k == lurlutil.KEY_DOWN then y=y+1
+		elseif k == lurlutil.KEY_ESCAPE then break
+		end
+		lurlutil.gotoxy(x,y) io.write "@" -- Output player
+		print(k,x,y)
+		lurlutil.flush()
+	end
+end
 
---lurlutil.cls()
---print "Test 9: Delay"
---print "Next numbers should appear rapidly after each other (but not instantly)."
---lurlutil.msleep(500)
---for (float t = 0 t <= 4 t += 0.33333333f) {
-----std::cout << t << "s"
-----lurlutil.msleep(333)
---}
+lurlutil.cls()
+print "Test 9: Delay"
+print "Next numbers should appear rapidly after each other (but not instantly)."
+lurlutil.msleep(500)
+for t = 0 , 4 , 0.33333333 do
+	print ( t .. "s" )
+	lurlutil.msleep(333)
+end
 waitkey()
 
---lurlutil.cls()
---print "Test 10: Terminal Dimensions"
---print "You should see the size in character rows and columns of your terminal window."
---std::cout << lurlutil.trows() << " Rows"
---std::cout << lurlutil.tcols() << " Columns"
+lurlutil.cls()
+print "Test 10: Terminal Dimensions"
+print "You should see the size in character rows and columns of your terminal window."
+print ( lurlutil.trows() ..  " Rows" )
+print ( lurlutil.tcols() .. " Columns" )
 waitkey()
---
---print "All tests done. Bye!"
---return 0
---}
+
+print "All tests done. Bye!"
+return 0

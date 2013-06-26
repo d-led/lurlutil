@@ -4,12 +4,18 @@
 #include <rlutil.h>
 #include <RefCountedPtr.h>
 #include <string>
+#include <cstdio>
 
 namespace lurlutil {
 	static std::string lua_getch() {
 		char ch=getch();
 		return std::string(1,ch);
 	}
+	
+	static void flush() {
+		fflush(stdout);
+	}
+	
 	static int 	BLACK	 = 	(int)rlutil::BLACK;
 	static int 	BLUE	 = 	(int)rlutil::BLUE;
 	static int 	GREEN	 = 	(int)rlutil::GREEN;
@@ -94,6 +100,10 @@ void register_lurlutil (lua_State* L) {
 			.addFunction("getch",lurlutil::lua_getch)
 			.addFunction("kbhit",kbhit)
 			.addFunction("gotoxy",gotoxy)
+			.addFunction("msleep",rlutil::msleep)
+			.addFunction("flush",lurlutil::flush)
+			.addFunction("trows",rlutil::trows)
+			.addFunction("tcols",rlutil::tcols)
 					
 			.addVariable("BLACK",&lurlutil::BLACK,false)
 			.addVariable("BLUE",&lurlutil::BLUE,false)
