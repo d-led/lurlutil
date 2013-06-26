@@ -51,7 +51,8 @@ local sln=solution "lurlutils"
 	configurations { "Debug", "Release" }
 	platforms { "native" }
 	includedirs {
-		sln.basedir
+		path.join(sln.basedir,"LuaBridge/Source/LuaBridge"),
+		path.join(sln.basedir,"rlutil")
 	}
 	vpaths {
 		["Headers"] = "**.h",
@@ -60,13 +61,12 @@ local sln=solution "lurlutils"
 
 ----------------------------------------------------------------------------------------------------------------
 
-local tests=project "test"
-	local basedir="lurlutil"
-	kind "DynamicLibrary"
+local tests=project "lurlutil"
+	local basedir="src"
+	kind "SharedLib"
 	DefaultConfig()
 	language "C++"
 	files {
 		path.join(basedir,"**.cpp"),
 		path.join(basedir,"**.h")
 	}
-	CompilerSpecificConfiguration()
