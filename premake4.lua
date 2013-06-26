@@ -44,6 +44,11 @@ function CompilerSpecificConfiguration()
 		postbuildcommands { "\"$(TargetPath)\"" }
 end
 
+function FixLibNameTmp()
+	configuration {"gmake"}
+		postbuildcommands  { "mv $(TARGET) lurlutil.so" }
+end
+
 -- A solution contains projects, and defines the available configurations
 local sln=solution "lurlutils"
     location "Build"
@@ -61,7 +66,7 @@ local sln=solution "lurlutils"
 
 ----------------------------------------------------------------------------------------------------------------
 
-local tests=project "lurlutil"
+local lib=project "lurlutil"
 	local basedir="src"
 	kind "SharedLib"
 	DefaultConfig()
@@ -70,3 +75,4 @@ local tests=project "lurlutil"
 		path.join(basedir,"**.cpp"),
 		path.join(basedir,"**.h")
 	}
+	FixLibNameTmp()

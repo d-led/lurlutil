@@ -13,6 +13,8 @@ namespace lurlutil {
 void register_lurlutil (lua_State* L) {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("lurlutil")
+			.addFunction("anykey",rlutil::anykey)
+			.addFunction("setColor",rlutil::setColor)
 		.endNamespace()
 		;
 }
