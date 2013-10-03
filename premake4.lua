@@ -1,10 +1,16 @@
 local OS=os.get()
-
+print(OS)
 local definitions = {
 	dir = {
 		linux = "ls",
-		windows = "dir"
-	}
+		windows = "dir",
+		macosx = "ls"
+	},
+	links = {
+		linux = "lua",
+		windows = "lua5.1",
+		macosx = "lua"
+	},
 }
 
 local cfg={}
@@ -76,6 +82,8 @@ local lib=project "lurlutil"
 		path.join(basedir,"**.h")
 	}
 	FixLibNameTmp()
+
+	links ( cfg.links )
 
 	newaction {
 		trigger     = "test",
