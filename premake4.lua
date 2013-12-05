@@ -29,8 +29,8 @@ configuration 'windows'
 	links { "lua5.1" }
 configuration { '*' }
 
--- 	newaction {
--- 		trigger     = "test",
--- 		description = "Start the test script",
--- 		--execute     = os.execute [[ src/test.lua ]]
--- 	}
+	newaction {
+		trigger     = "test",
+		description = "Start the test script",
+		execute     = function() os.execute [[ lua src/test.lua ]] end
+	}
