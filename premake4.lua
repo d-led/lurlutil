@@ -1,92 +1,36 @@
-local OS=os.get()
-print(OS)
-local definitions = {
-	dir = {
-		linux = "ls",
-		windows = "dir",
-		macosx = "ls"
-	},
-	links = {
-		linux = "lua",
-		windows = "lua5.1",
-		macosx = "lua"
-	},
+_G.package.path=_G.package.path..[[;./?.lua;./?/?.lua]]
+assert ( require 'premake.quickstart' )
+
+make_solution 'lurlutil'
+
+includedirs { 
+	'./rlutil',
+	'./LuaBridge-1.0.2'
 }
 
-local cfg={}
-
-for i,v in pairs(definitions) do
- cfg[i]=definitions[i][OS]
-end
-
--- Apply to current "filter" (solution/project)
-function DefaultConfig()
-	location "Build"
-	configuration "Debug"
-		defines { "DEBUG", "_DEBUG" }
-		objdir "Build/obj"
-		targetdir "Build/Debug"
-		flags { "Symbols" }
-	configuration "Release"
-		defines { "RELEASE" }
-		objdir "Build/obj"
-		targetdir "Build/Release"
-		flags { "Optimize" }
-	configuration "*" -- to reset configuration filter
-end
-
-function CompilerSpecificConfiguration()
-	configuration {"xcode*" }
-		postbuildcommands {"$TARGET_BUILD_DIR/$TARGET_NAME"}
-
-	configuration {"gmake"}
-		postbuildcommands  { "$(TARGET)" }
-		buildoptions { "-std=gnu++0x" }
-
-	configuration {"codeblocks" }
-		postbuildcommands { "$(TARGET_OUTPUT_FILE)"}
-
-	configuration { "vs*"}
-		postbuildcommands { "\"$(TargetPath)\"" }
-end
-
-function FixLibNameTmp()
-	configuration {"gmake"}
-		postbuildcommands  { "mv $(TARGET) lurlutil.so" }
-end
-
--- A solution contains projects, and defines the available configurations
-local sln=solution "lurlutils"
-    location "Build"
-	sln.absbasedir=path.getabsolute(sln.basedir)
-	configurations { "Debug", "Release" }
-	platforms { "native" }
-	includedirs {
-		path.join(sln.basedir,"LuaBridge/Source/LuaBridge"),
-		path.join(sln.basedir,"rlutil")
+make_shared_lib( 'lurlutil',
+	{
+		'./src/*.h',
+		'./src/*.cpp'
 	}
-	vpaths {
-		["Headers"] = "**.h",
-		["Sources"] = {"**.cc", "**.cpp"},
-	}
+)
+language "C++"
+targetprefix ''
+targetdir '.'
 
-----------------------------------------------------------------------------------------------------------------
+-- links
+configuration 'macosx'
+	links { 'lua' }
+	targetextension '.so'
+configuration 'linux'
+	links { 'lua5.1-c++' }
+	includedirs { '/usr/include/lua5.1' }
+configuration 'windows'
+	links { "lua5.1" }
+configuration { '*' }
 
-local lib=project "lurlutil"
-	local basedir="src"
-	kind "SharedLib"
-	DefaultConfig()
-	language "C++"
-	files {
-		path.join(basedir,"**.cpp"),
-		path.join(basedir,"**.h")
-	}
-	FixLibNameTmp()
-
-	links ( cfg.links )
-
-	newaction {
-		trigger     = "test",
-		description = "Start the test script",
-		--execute     = os.execute [[ src/test.lua ]]
-	}
+-- 	newaction {
+-- 		trigger     = "test",
+-- 		description = "Start the test script",
+-- 		--execute     = os.execute [[ src/test.lua ]]
+-- 	}

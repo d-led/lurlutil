@@ -1,6 +1,6 @@
 [submodule "rlutil"]
 	path = rlutil
 	url = https://github.com/tapio/rlutil.git
-[submodule "LuaBridge"]
-	path = LuaBridge
-	url = https://github.com/vinniefalco/LuaBridge.git
+[submodule "premake"]
+	path = premake
+	url = https://github.com/d-led/premake-meta-cpp.git
