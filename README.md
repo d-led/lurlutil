@@ -113,4 +113,4 @@ dependencies
 license
 -------
 
-Creative Commons License
+[MIT License](http://opensource.org/licenses/MIT)
