@@ -30,6 +30,8 @@ usage
 constants
 ---------
 
+| description | constant |
+| ---- | ---- | 
 | | `lurlutil.ANSI_BLACK` |
 | | `lurlutil.ANSI_BLUE` |
 | | `lurlutil.ANSI_BROWN` |
