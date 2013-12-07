@@ -1,3 +1,5 @@
+_G.package.path=_G.package.path..[[;./?.lua;./?/?.lua]]
+_G.package.cpath=_G.package.cpath..[[;./?.dll;./?/?.dll]]
 assert(require 'lurlutil')
 
 local function waitkey() print "Press any key to continue..." lurlutil.anykey() end
