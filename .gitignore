@@ -33,6 +33,8 @@
 *.exp
 *.vspscc
 *.vssscc
+*.lib
+*.idb
 .builds
 
 *.pidb
