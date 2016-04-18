@@ -112,10 +112,14 @@ namespace lurlutil {
 	static int 	KEY_NUMPAD9	 = 	(int)rlutil::KEY_NUMPAD9;		
 }
 
+void anykey() {
+    rlutil::anykey();
+}
+
 void register_lurlutil (lua_State* L) {
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("lurlutil")
-			.addFunction("anykey",rlutil::anykey)
+			.addFunction("anykey",anykey)
 			.addFunction("setColor",rlutil::setColor)
 			.addFunction("getkey",rlutil::getkey)
 			.addFunction("cls",rlutil::cls)
