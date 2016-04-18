@@ -109,3 +109,6 @@ UpgradeLog*.XML
 packages/
 
 #my
+*.dll
+*.opendb
+*.db

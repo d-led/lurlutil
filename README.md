@@ -6,8 +6,8 @@ a lua wrapper for the portable console manipulation library rlutil
 usage
 -----
 
-task | code | 
----- | ---- | 
+task | code |
+---- | ---- |
 load the library into the `lurlutil` table                          | `assert(require 'lurlutil')`
 wait for any key to be pressed                                      | `lurlutil.anykey()`
 set the console foreground color                                    | `lurlutil.setColor( color )`
@@ -30,8 +30,8 @@ read a key and return a key code                                    | `lurlutil.
 constants
 ---------
 
-| constant | description | 
-| ---- | ---- | 
+| constant | description |
+| ---- | ---- |
 | `lurlutil.ANSI_BLACK` | |
 | `lurlutil.ANSI_BLUE` | |
 | `lurlutil.ANSI_BROWN` | |
@@ -109,6 +109,13 @@ dependencies
  - naturally, Lua as the binding target
  - LuaBridge for the C++ binding
  - Premake for generating makefiles and solutions
+
+
+build
+-----
+
+- generate the build config, i.e. `premake\premake5 vs2015` on Windows or `premake/premake5 gmake` on Linux (adjust the paths in premake5.lua if necessary).
+- test: `<path_to>/premake5 test`
 
 license
 -------
